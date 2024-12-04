@@ -41,9 +41,9 @@ public class AuthService {
     // Método Register Adicionado
     public void register(String username, String password) {
         // Verifique se o usuário já existe
-        if (userRepository.findByUsername(username).isPresent()) {
-            throw new RuntimeException("Usuário já existe.");
-        }
+//        if (userRepository.findByUsername(username).isPresent()) {
+//            throw new RuntimeException("Usuário já existe.");
+//        }
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password)); // Encripta a senha
