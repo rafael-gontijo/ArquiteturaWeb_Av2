@@ -3,6 +3,9 @@ package com.arquiteturaWeb.provaAv2.service;
 import com.arquiteturaWeb.provaAv2.config.JwtUtil;
 import com.arquiteturaWeb.provaAv2.model.User;
 import com.arquiteturaWeb.provaAv2.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class AuthService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
@@ -18,6 +22,12 @@ public class AuthService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
+    }
+
+    public User getLoggedUser() {
+        var auth = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+
+        return userRepository.findByUsername(auth.getName()).orElseThrow(EntityNotFoundException::new);
     }
 
     public String login(String username, String password) {
