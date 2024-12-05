@@ -23,8 +23,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable); // Atualização para a nova sintaxe Lambda DSL
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/api/auth/**").permitAll()  // Permite o acesso à autenticação
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()  // Permite o acesso ao Swagger
+                .anyRequest().authenticated()  // Requer autenticação para outras rotas
         );
 
         http.addFilterBefore(jwtAuthFilter, BasicAuthenticationFilter.class);
