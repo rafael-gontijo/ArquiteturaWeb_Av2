@@ -72,8 +72,7 @@ A documentação Java gerada está disponível no repositório.
 ## Hospedagem **[Em Desenvolvimento]**
 A aplicação está hospedada na plataforma Render.
 Acesse a aplicação no seguinte link:
-**Aplicação no Render**
-
+https://arquiteturaweb-av2.onrender.com
 
 ---
 
